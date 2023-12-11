@@ -1,0 +1,12 @@
+def ubrat_zpt(line: str) -> str:
+   trans_table = {ord("{"): None, ord("}"): None}
+   answer = line.translate(trans_table)
+   return answer
+def make_dict(line: str) -> dict:
+    slovar = dict(tuple(x.split(':')) for x in line[0:-1].split(', '))
+    return slovar
+with open(file='purchase_log.txt', mode='r', encoding='utf-8') as text:
+    for line in text:
+        line_without_zpt = ubrat_zpt(line)
+        purchases = make_dict(line_without_zpt)
+        print(purchases['"user_id"'], purchases['"category"'])
